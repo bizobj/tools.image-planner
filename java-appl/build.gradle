@@ -1,5 +1,5 @@
-description 'Java library X'
-group 'org.bizobj.projectx'
+description 'Bizobj tools - Project planner with Image file and their names'
+group 'org.bizobj.tools.image_planner'
 version '1.0'
 
 defaultTasks 'dist'

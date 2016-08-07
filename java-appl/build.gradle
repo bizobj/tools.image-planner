@@ -1,0 +1,49 @@
+description 'Java library X'
+group 'org.bizobj.projectx'
+version '1.0'
+
+defaultTasks 'dist'
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
+
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-collections:commons-collections:3.2.1'
+}
+
+//The output folder to store the distribution jars
+def distsOutputDir = "dist"
+
+task sourceJar(type: Jar, dependsOn: classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+task clean(type: Delete) {
+	delete buildDir
+	delete distsDir
+	delete distsOutputDir
+}
+
+task distJar(type: Copy, dependsOn: [jar]) {
+	from libsDir
+	into "${distsOutputDir}/jars"
+	include '*.jar' exclude '*-sources.jar'
+}
+
+task distSourceJar(type: Copy, dependsOn: [sourceJar]) {
+	from libsDir
+	into "${distsOutputDir}/srcs"
+	include '*-sources.jar'
+}
+
+task dist(type: Copy, dependsOn: [clean, distJar, distSourceJar]) {
+	//Do nothing
+}

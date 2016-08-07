@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Project Report</title>
+
+    <!--
+        jquery-1.12.4/dist/jquery.js
+        jquery-treegrid-0.3.0/js/jquery.treegrid.js
+     -->
+    <style>
+        .treegrid-indent {width:16px; height: 16px; display: inline-block; position: relative;}
+        .treegrid-expander {width:16px; height: 16px; display: inline-block; position: relative; cursor: pointer;}
+    
+        .treegrid-expander-expanded::before {content: "-"}
+        .treegrid-expander-collapsed::before {content: "+"}
+    </style>
+    <script>${jqueryJavascript}</script>
+    <script>${jqueryTreegridJavascript}</script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.tree').treegrid();
+            $('.sub-module').treegrid('collapse');
+            $('.module').treegrid('collapse');
+            
+            $(".imageSwitcher").click(function(event){
+            	$(".image").hide();
+            	$(this).parent().parent().find("img").show();
+            	event.stopPropagation();
+            });
+            
+            $(window).click(function(){
+            	$(".image").hide();
+            });
+            
+            $("#showModules").click(function(){
+            	$('.sub-module').treegrid('collapse');
+                $('.module').treegrid('collapse');
+            });
+            $("#showSubModules").click(function(){
+            	$('.sub-module').treegrid('collapse');
+                $('.module').treegrid('expand');
+            });
+        });
+    </script>
+
+    <style>
+        table {
+          width:100%;
+          border-collapse:collapse;
+        }
+        
+        th {
+          text-align: center;
+          color: darkblue;
+          background-color: lightblue;
+          padding:5px 10px;
+          border:1px solid #e5e5e5;
+        }
+        
+        td {
+          text-align:left;
+          padding:5px 10px;
+          border:1px solid #e5e5e5;
+        }
+        
+        tr.module {
+            background-color: #F0F0F0;
+        }
+        tr.sub-module {
+            background-color: #FAFAFA;
+        }
+    </style>
+  </head>
+  <body>
+      <a id="showModules" href="javascript:void(0)">Show Modules</a>
+       | <a id="showSubModules" href="javascript:void(0)">Show Sub-Modules</a>
+      <hr/>
+      <table class="tree">
+        <tr>
+          <th>Task</th>
+          <th style="width:20px">Image</th>
+          <th>Finish (<code>Total ${statPercent} %</code>)</th>
+          <th>Functions (<code>Total ${statPoints}</code>)</th>
+        </tr>
+      #foreach( $item in $reportItems)
+        #if($item.parentId<=0)
+        <tr class="treegrid-${item.id} ${item.type}">
+        #else
+        <tr class="treegrid-${item.id} treegrid-parent-${item.parentId} ${item.type}">
+        #end
+          #if($item.imageUrl)
+          <td><a class="imageSwitcher" href="javascript:void(0)">${item.name}</a></td>
+          <td><img class="image" style="display:none; position:fixed; top:1px" src="$item.imageUrl" height="95%"/></td>
+          #else
+          <td>${item.name}</td>
+          <td></td>
+          #end
+          <td style="text-align:right">#if($item.percentage>0) ${item.percentage} % #end</td>
+          <td style="text-align:center">#if($item.points>0) ${item.points} #end</td>
+        </tr>
+      #end
+      </table>
+
+  </body>
+</html>

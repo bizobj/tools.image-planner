@@ -35,8 +35,11 @@ public class Main {
 		log.info("Read images from: "+imagesDir.getCanonicalPath());
 		File dataFile = new File(dataDir, "plan.xlsx");
 		log.info("Read and write new plan to: "+dataFile.getCanonicalPath());
+		File reportFile = new File(dataDir, "plan.html");
+		log.info("Write new plan report to: "+reportFile.getCanonicalPath());
 
-		PlanMaker.make(imagesDir, dataFile);
+		PlanMaker.make(imagesDir, dataFile, reportFile);
+		log.info("SUCCESS: "+Main.class.getName()+".");
 	}
 
 }

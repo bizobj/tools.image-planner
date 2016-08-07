@@ -1,5 +1,7 @@
 package org.bizobj.tools.image_planner.model;
 
+import java.math.BigDecimal;
+
 public class PlanItem {
 	/** Image file name, as the identity of a plan item */
 	private String fileName;
@@ -65,6 +67,11 @@ public class PlanItem {
 	}
 	public void setPercent04Misc(double percent04Misc) {
 		this.percent04Misc = percent04Misc;
+	}
+	
+	public BigDecimal getPercent(){
+		double avg = (getPercent01UI()+getPercent02Biz()+getPercent03UE()+getPercent04Misc())/4;
+		return new BigDecimal(avg);
 	}
 	
 	/**

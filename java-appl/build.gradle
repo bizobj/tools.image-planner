@@ -18,6 +18,9 @@ dependencies {
     compile 'commons-collections:commons-collections:3.2.1'
 }
 
+archivesBaseName = "bizobj-tools-images-planner"
+eclipse.project.name = "bizobj-tools-images-planner"
+
 //The output folder to store the distribution jars
 def distsOutputDir = "dist"
 
@@ -26,7 +29,7 @@ task sourceJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-task clean(type: Delete) {
+task _clean(type: Delete) {
 	delete buildDir
 	delete distsDir
 	delete distsOutputDir
@@ -44,6 +47,6 @@ task distSourceJar(type: Copy, dependsOn: [sourceJar]) {
 	include '*-sources.jar'
 }
 
-task dist(type: Copy, dependsOn: [clean, distJar, distSourceJar]) {
+task dist(type: Copy, dependsOn: [_clean, distJar, distSourceJar]) {
 	//Do nothing
 }

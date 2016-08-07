@@ -20,6 +20,15 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/log4j/log4j
 	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	// https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
+	
+	// https://mvnrepository.com/artifact/org.jxls/jxls
+    compile group: 'org.jxls', name: 'jxls', version: '2.3.0'
+	// https://mvnrepository.com/artifact/org.jxls/jxls-poi
+	compile group: 'org.jxls', name: 'jxls-poi', version: '1.0.11'
+	// https://mvnrepository.com/artifact/org.jxls/jxls-reader
+	compile group: 'org.jxls', name: 'jxls-reader', version: '2.0.2'
 }
 
 archivesBaseName = "bizobj-tools-images-planner"

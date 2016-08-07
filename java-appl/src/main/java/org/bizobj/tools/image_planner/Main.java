@@ -3,6 +3,7 @@ package org.bizobj.tools.image_planner;
 import java.io.File;
 
 import org.apache.log4j.Logger;
+import org.bizobj.tools.image_planner.core.PlanMaker;
 
 /**
  * The main entry
@@ -29,6 +30,13 @@ public class Main {
 		}
 		
 		log.info("Start "+Main.class.getName()+", with data path = '"+dataDir.getCanonicalPath()+"'");
+		
+		File imagesDir = new File(dataDir, "images");
+		log.info("Read images from: "+imagesDir.getCanonicalPath());
+		File dataFile = new File(dataDir, "plan.xlsx");
+		log.info("Read and write new plan to: "+dataFile.getCanonicalPath());
+
+		PlanMaker.make(imagesDir, dataFile);
 	}
 
 }

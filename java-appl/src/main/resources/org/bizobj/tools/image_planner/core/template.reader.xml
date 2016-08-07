@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbook>
+	<worksheet name="PlanData">
+		<section startRow="0" endRow="0" />
+		<loop startRow="1" endRow="1" items="plans" var="plan" varType="org.bizobj.tools.image_planner.model.PlanItem">
+			<section startRow="1" endRow="1">
+				<mapping row="1" col="0">plan.mainModule</mapping>
+				<mapping row="1" col="1">plan.subModule</mapping>
+				<mapping row="1" col="2">plan.taskName</mapping>
+				<mapping row="1" col="3">plan.percent01UI</mapping>
+				<mapping row="1" col="4">plan.percent02Biz</mapping>
+				<mapping row="1" col="5">plan.percent03UE</mapping>
+				<mapping row="1" col="6">plan.percent04Misc</mapping>
+				<mapping row="1" col="7">plan.fileName</mapping>
+			</section>
+			<loopbreakcondition>
+				<rowcheck offset="0">
+					<cellcheck offset="0"></cellcheck>
+				</rowcheck>
+			</loopbreakcondition>
+		</loop>
+	</worksheet>
+</workbook>

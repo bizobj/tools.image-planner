@@ -1,10 +1,34 @@
 package org.bizobj.tools.image_planner;
 
+import java.io.File;
+
+import org.apache.log4j.Logger;
+
+/**
+ * The main entry
+ */
 public class Main {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	private static final Logger log = Logger.getLogger(Main.class);
+	
+	/**
+	 * Start application, with the only one argument - the data path.
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws Exception {
+		if (args.length<1){
+			throw new RuntimeException("Please indicate the first argument - the data path");
+		}
+		String dataPath = args[0];
+		File dataDir = new File(dataPath);
+		if (! dataDir.exists()){
+			throw new RuntimeException("The data path '"+dataPath+"' is not exites");
+		}
+		if (! dataDir.isDirectory()){
+			throw new RuntimeException("The data path '"+dataPath+"' MUST be a directory");
+		}
+		
+		log.info("Start "+Main.class.getName()+", with data path = '"+dataDir.getCanonicalPath()+"'");
 	}
 
 }
